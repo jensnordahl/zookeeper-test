@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.jayway.test.jno-zookeper'
+version = '0.3.4-SNAPSHOT'
+
+description = """zookeeper test client"""
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.apache.zookeeper', name: 'zookeeper', version:'3.4.5'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.6.1'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.6.1'
+    compile group: 'log4j', name: 'log4j', version:'1.2.16'
+    testCompile group: 'junit', name: 'junit', version:'4.8.2'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version:'1.1'
+    testCompile group: 'org.mockito', name: 'mockito-all', version:'1.8.5'
+}
