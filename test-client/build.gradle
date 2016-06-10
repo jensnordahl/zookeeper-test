@@ -25,4 +25,5 @@ dependencies {
 task execute(type:JavaExec) {
     main = 'com.jayway.jno.zookeeper.MembershipDemo'
     classpath = sourceSets.main.runtimeClasspath
+    args = [clientName]
 }
