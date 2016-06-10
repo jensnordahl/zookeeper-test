@@ -9,8 +9,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-        
-     maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "http://repo.maven.apache.org/maven2" }
 }
 
 dependencies {
@@ -21,4 +20,9 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version:'4.8.2'
     testCompile group: 'org.hamcrest', name: 'hamcrest-all', version:'1.1'
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.8.5'
+}
+
+task execute(type:JavaExec) {
+    main = 'com.jayway.jno.zookeeper.MembershipDemo'
+    classpath = sourceSets.main.runtimeClasspath
 }
