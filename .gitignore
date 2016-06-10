@@ -1,5 +1,7 @@
-stuff
-target
-zk-server
-build
-.gradle
+stuff/
+zk-server/
+build/
+.gradle/
+bin/
+zookeeper.out
+
