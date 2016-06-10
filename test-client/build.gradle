@@ -1,20 +1,18 @@
 apply plugin: 'java'
-apply plugin: 'maven'
 
 group = 'com.jayway.test.jno-zookeper'
-version = '0.3.4-SNAPSHOT'
+version = '0.0.1-SNAPSHOT'
 
 description = """zookeeper test client"""
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
-
-
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
         
      maven { url "http://repo.maven.apache.org/maven2" }
 }
+
 dependencies {
     compile group: 'org.apache.zookeeper', name: 'zookeeper', version:'3.4.5'
     compile group: 'org.slf4j', name: 'slf4j-api', version:'1.6.1'
