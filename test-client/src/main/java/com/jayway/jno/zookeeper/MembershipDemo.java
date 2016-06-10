@@ -1,22 +1,22 @@
 package com.jayway.jno.zookeeper;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
+import org.apache.zookeeper.ZooDefs;
+import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MembershipDemo {
 	
     private static final Logger logger = LoggerFactory.getLogger(MembershipDemo.class);
-	private static final int ZOOKEEPER_SESSION_TIMEOUT_MILLIS = 2000;
+	private static final int ZOOKEEPER_SESSION_TIMEOUT_MILLIS = 500;
 	private static final String zooKeeperConnectString = "localhost:2181";
 	private ZooKeeper zooKeeper;
     private final String clientName;
@@ -64,6 +64,20 @@ public class MembershipDemo {
             throw new RuntimeException(e);
         } 
     }
+
+    Watcher membershipWatcher = e -> {
+        logger.info("Membership changed");
+        getAndWatchMembers();
+    };
+
+    public void getAndWatchMembers() {
+        try {
+            List<String> members = zooKeeper.getChildren("/members", membershipWatcher);
+            logger.info("Members: {}", members);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     
 	private class ZooKeeperWatcher implements Watcher {
 
@@ -73,7 +87,9 @@ public class MembershipDemo {
 		    if (e.getType() == EventType.None && e.getState() == KeeperState.SyncConnected) {
 	            logger.info("Registering self as member");
 		        registerSelfAsMember();
+		        getAndWatchMembers();
 		    }
 		}
 	}
+
 }
