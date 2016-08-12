@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.apache.curator', name: 'curator-recipes', version:'3.2.0'
     compile group: 'org.apache.zookeeper', name: 'zookeeper', version:'3.4.5'
     compile group: 'org.slf4j', name: 'slf4j-api', version:'1.6.1'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.6.1'
@@ -22,8 +23,15 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.8.5'
 }
 
-task execute(type:JavaExec) {
+task executeMembershipDemo(type:JavaExec) {
     main = 'com.jayway.jno.zookeeper.MembershipDemo'
     classpath = sourceSets.main.runtimeClasspath
-    args = [clientName]
+    if (project.hasProperty('clientName')) {
+        args = [clientName]
+    }
+}
+
+task executeLockDemo(type:JavaExec) {
+    main = 'com.jayway.jno.curator.LockDemo'
+    classpath = sourceSets.main.runtimeClasspath
 }
