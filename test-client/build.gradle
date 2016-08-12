@@ -35,3 +35,8 @@ task executeLockDemo(type:JavaExec) {
     main = 'com.jayway.jno.curator.LockDemo'
     classpath = sourceSets.main.runtimeClasspath
 }
+
+task executeLeaderLatchDemo(type:JavaExec) {
+    main = 'com.jayway.jno.curator.LeaderLatchDemo'
+    classpath = sourceSets.main.runtimeClasspath
+}
